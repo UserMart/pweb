@@ -2,11 +2,11 @@
 <html>
 <body>
 <?php
-$nome = $_POST["Nome"];
-$telefone = $_POST["Telefone"];
+$nome = $_POST["nome"];
+$telefone = $_POST["telefone"];
 $conn = mysqli_connect($servidor, $dbusuario, $dbsenha, $dbname);
 mysqli_select_db($conn, '$dbname');
-$sql = "INSERT INTO tbformulario (Nome, Telefone) VALUES ('$nome','$telefone')";
+$sql = "INSERT INTO tbforms (nome, telefone) VALUES ('$nome','$telefone')";
 if(mysqli_query($conn, $sql)){
     echo "<script>alert('Foi Sucesso!'); window.location = 'index.php'; </script>";
 
