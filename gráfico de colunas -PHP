@@ -1,0 +1,58 @@
+// utilizando a biblioteca google charts;
+// o gráfico que vou fazer é um levantamento de professores que retornaria as aulas presenciais no IFAL em feveriro com respostas: Sim e Não;
+// Primeiro eu teria que carregar a biblioteca do google charts;
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  ...
+</script>
+
+//No Google Charts, utilizei um objeto fornecido pela biblioteca para armazenar os dados, o google.visualization.DataTable().
+//Os dados são armazenados em células, referenciadas por linhas e colunas, onde as colunas são um array começando em zero, bem como as linhas.
+
+var data = new google.visualization.DataTable();
+ 
+data.addColumn('string', 'Resposta');
+data.addColumn('number', 'Número');
+         
+data.addRows(
+        [
+           ['Sim' , 78  ],
+           ['Não' , 178 ]
+        ]            
+);
+//No código acima criei o objeto de DataTable na linha 15, e adicionei uma coluna do tipo string(linha 17) que será a coluna da resposta,
+//na linha 18 adicionei uma coluna do tipo numérico que será o número de pessoas que deu esta resposta. Na linha 20 adicionei as linhas ,
+//que serão as os dados do nosso gráfico, ou seja neste caso as resposta as dadas. Fazemos isto através do método addRows que recebe uma matriz(ou array de arrays) 
+//que será a nossa tabela de dados com as informações que iram gerar o gráfico.
+
+//Para mostrar os dados de gráfico utilizei apenas uma matriz através da função arrayToDataTable(), 
+//passando uma matriz, onde a linha 34 é a definição das colunas e as demais a linhas são os dados ditos
+
+var data = google.visualization.arrayToDataTable([
+                    [{id: 'nome', label:'Nome' , type: 'string'} , { id: 'salario', label: 'Salário', type:'number' }],
+                    ['Douglas',     { v: 2500 , f: 'R$ 2.250,00'}], 
+                    ['Roberto',     { v: 3500 , f: 'R$ 3.500,00'}],
+                    ['Wilma',       { v: 4400 , f: 'R$ 4.400,00'}],
+                    ['Catarina',    { v: 2700 , f: 'R$ 2.700,00'}],
+                    ['Felipe',      { v: 9200 , f: 'R$ 9.200,00'}],
+                    ['Daniel',      { v: 1850 , f: 'R$ 1.850,00'}]
+                    ],
+                false);
+                
+  
+// Com os dados prontos vou criar um objeto do tipo de gráfico desejado e chamar a função;
+
+var options = {
+              'title':'Professores Que Querem Voltar as Aulas Prencialmente em Fevereiro de 2022?',
+              'width':500,
+              'height':350,
+               colors: ['#3366CC', '#DC3912']
+               };
+ 
+var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+chart.draw(data, options);
+
+//Na linha 55 criamos um gráfico do tipo Pizza dentro do div com o id chart_div. 
